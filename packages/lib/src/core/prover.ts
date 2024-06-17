@@ -1,5 +1,5 @@
 import { Profiler } from "@personaelabs/spartan-ecdsa/src/helpers/profiler";
-import { IProver, MerkleProof, NIZK, ProveArgs, ProverConfig } from "@personaelabs/spartan-ecdsa/src/types";
+import { IProver, NIZK, ProveArgs, ProverConfig } from "@personaelabs/spartan-ecdsa/src/types";
 import { loadCircuit, fromSig, snarkJsWitnessGen } from "@personaelabs/spartan-ecdsa/src/helpers/utils";
 import {
   PublicInput,

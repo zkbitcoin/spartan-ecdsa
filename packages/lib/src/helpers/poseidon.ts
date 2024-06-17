@@ -7,7 +7,7 @@ export class Poseidon {
   hash(inputs: bigint[]): bigint {
     const inputsBytes = new Uint8Array(32 * inputs.length);
     for (let i = 0; i < inputs.length; i++) {
-      inputsBytes.set(bigIntToLeBytes(inputs[i], 32), i * 32);
+      inputsBytes.set(bigIntToLeBytes(inputs[i] as bigint, 32), i * 32);
     }
 
     const result = wasm.poseidon(inputsBytes);
