@@ -50,7 +50,7 @@ describe("public_input", () => {
     const v = BigInt(28);
 
     const circuitPubInput = new CircuitPubInput(merkleRoot, Tx, Ty, Ux, Uy);
-    const effEcdsaPubInput = new PublicInput(rX, v, msgHash, circuitPubInput);
+    const effEcdsaPubInput = new PublicInput(rX, v, msgHash as Buffer, circuitPubInput);
     const isValid = verifyEffEcdsaPubInput(effEcdsaPubInput);
 
     expect(isValid).toBe(true);

@@ -18,6 +18,7 @@ describe("ecdsa", () => {
       "f5b552f608f5b552f608f5b552f6082ff5b552f608f5b552f608f5b552f6082f",
       "hex"
     );
+    //const pubKey = ec.keyFromPrivate(privKey.toString("hex")).getPublic();
     const pubKey = ec.keyFromPrivate(privKey.toString("hex")).getPublic();
     const msg = Buffer.from("hello world");
     const circuitInput = getEffEcdsaCircuitInput(privKey, msg);

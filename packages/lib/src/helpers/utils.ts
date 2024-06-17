@@ -64,8 +64,8 @@ export const bigIntToLeBytes = (n: bigint, size: number): Uint8Array => {
 export const fromSig = (sig: string): { r: bigint; s: bigint; v: bigint } => {
   const { r: _r, s: _s, v } = fromRpcSig(sig);
   //const r = BigInt("0x" + _r .toString("hex"));
-  const r = BigInt("0x" + _r .toString());
+  const r = bytesToBigInt(_r);
   //const s = BigInt("0x" + _s.toString("hex"));
-  const s = BigInt("0x" + _s.toString());
+  const s = bytesToBigInt(_s);
   return { r, s, v };
 };

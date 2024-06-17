@@ -3,13 +3,19 @@ import {
   privateToAddress,
   ecsign
 } from "@ethereumjs/util";
+/*
 import {
   Tree,
   Poseidon,
   MembershipProver,
   MembershipVerifier
 } from "@personaelabs/spartan-ecdsa";
+ */
 import * as path from "path";
+import { Poseidon } from "@personaelabs/spartan-ecdsa/src/helpers/poseidon";
+import { Tree } from "@personaelabs/spartan-ecdsa/src/helpers/tree";
+import { MembershipProver } from "@personaelabs/spartan-ecdsa/src/core/prover";
+import { MembershipVerifier } from "@personaelabs/spartan-ecdsa/src/core/verifier";
 
 const benchAddrMembership = async () => {
   const privKey = Buffer.from("".padStart(16, "🧙"), "utf16le");
@@ -66,7 +72,7 @@ const benchAddrMembership = async () => {
   await prover.initWasm();
 
   // Prove membership
-  const { proof, publicInput } = await prover.prove(sig, msgHash, merkleProof);
+  const { proof, publicInput } = await prover.prove({sig, msgHash, merkleProof});
 
   const verifierConfig = {
     circuit: proverConfig.circuit,
@@ -78,7 +84,7 @@ const benchAddrMembership = async () => {
   await verifier.initWasm();
 
   // Verify proof
-  await verifier.verify(proof, publicInput.serialize());
+  await verifier.verify({proof, publicInputSer: publicInput.serialize()});
 };
 
 export default benchAddrMembership;

@@ -14,7 +14,8 @@ describe("eff_ecdsa_to_addr", () => {
     );
     const pubKey = ec.keyFromPrivate(privKey.toString("hex")).getPublic();
     const addr = BigInt(
-      "0x" + privateToAddress(privKey).toString("hex")
+      //"0x" + privateToAddress(privKey).toString("hex")
+      "0x" + privateToAddress(privKey).toString()
     ).toString(10);
 
     const circuit = await wasm_tester(

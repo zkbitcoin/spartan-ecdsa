@@ -2,7 +2,9 @@ import {
   hashPersonalMessage,
   ecsign,
   privateToAddress,
-  privateToPublic
+  privateToPublic,
+  bytesToBigInt,
+  bytesToInt, addHexPrefix
 } from "@ethereumjs/util";
 
 import * as path from "path";
@@ -29,10 +31,13 @@ describe("membership prove and verify", () => {
 
   let msg = Buffer.from("harry potter");
   const msgHash = hashPersonalMessage(msg);
+  let msgHashBuffer: Buffer = msgHash as Buffer
+
 
   const { v, r, s } = ecsign(msgHash, proverPrivKey);
-  const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
-
+  //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
+  const sig = addHexPrefix(Buffer.from(r).toString('hex') +Buffer.from(s).toString('hex') + v.toString(16));
+  
   let poseidon: Poseidon;
 
   beforeAll(async () => {
@@ -70,7 +75,7 @@ describe("membership prove and verify", () => {
       // Insert the members into the tree
       for (const privKey of privKeys) {
         const pubKey = privateToPublic(privKey);
-        const pubKeyHash = poseidon.hashPubKey(pubKey);
+        const pubKeyHash = poseidon.hashPubKey(pubKey as Buffer);
         pubKeyTree.insert(pubKeyHash);
 
         // Set prover's public key hash for the reference below
@@ -84,7 +89,7 @@ describe("membership prove and verify", () => {
       const index = pubKeyTree.indexOf(proverPubKeyHash as bigint);
       const merkleProof = pubKeyTree.createProof(index);
 
-      nizk = await pubKeyMembershipProver.prove({ sig, msgHash, merkleProof });
+      nizk = await pubKeyMembershipProver.prove({ sig, msgHash: msgHashBuffer, merkleProof });
 
       const { proof, publicInput } = nizk;
       expect(
@@ -147,8 +152,9 @@ describe("membership prove and verify", () => {
       let proverAddress;
       // Insert the members into the tree
       for (const privKey of privKeys) {
-        const address = BigInt(
-          "0x" + privateToAddress(privKey).toString("hex")
+        const address = bytesToBigInt(
+          //"0x" + privateToAddress(privKey).toString("hex")
+        privateToAddress(privKey)
         );
         addressTree.insert(address);
 
@@ -163,7 +169,7 @@ describe("membership prove and verify", () => {
 
       await addressMembershipProver.initWasm();
 
-      nizk = await addressMembershipProver.prove({ sig, msgHash, merkleProof });
+      nizk = await addressMembershipProver.prove({ sig, msgHash: msgHashBuffer, merkleProof });
       await addressMembershipVerifier.initWasm();
 
       expect(

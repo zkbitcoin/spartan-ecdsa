@@ -1,9 +1,15 @@
+/*
 import {
   MembershipProver,
   Poseidon,
   Tree,
   MembershipVerifier
 } from "@personaelabs/spartan-ecdsa";
+ */
+import { Poseidon } from "@personaelabs/spartan-ecdsa/src/helpers/poseidon";
+import { Tree } from "@personaelabs/spartan-ecdsa/src/helpers/tree";
+import { MembershipProver } from "@personaelabs/spartan-ecdsa/src/core/prover";
+import { MembershipVerifier } from "@personaelabs/spartan-ecdsa/src/core/verifier";
 import {
   hashPersonalMessage,
   ecsign,
@@ -63,7 +69,7 @@ const benchPubKeyMembership = async () => {
   await prover.initWasm();
 
   // Prove membership
-  const { proof, publicInput } = await prover.prove(sig, msgHash, merkleProof);
+  const { proof, publicInput } = await prover.prove({sig, msgHash, merkleProof});
 
   const verifierConfig = {
     circuit: proverConfig.circuit,
@@ -75,7 +81,7 @@ const benchPubKeyMembership = async () => {
   await verifier.initWasm();
 
   // Verify proof
-  await verifier.verify(proof, publicInput.serialize());
+  await verifier.verify({proof, publicInputSer: publicInput.serialize()});
 };
 
 export default benchPubKeyMembership;

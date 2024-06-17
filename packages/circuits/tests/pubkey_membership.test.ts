@@ -1,7 +1,8 @@
 const wasm_tester = require("circom_tester").wasm;
 var EC = require("elliptic").ec;
 import * as path from "path";
-import { Poseidon, Tree } from "@personaelabs/spartan-ecdsa";
+//import { Poseidon, Tree } from "@personaelabs/spartan-ecdsa";
+import { Poseidon, Tree } from "@personaelabs/spartan-ecdsa/dist/src";
 import { privateToPublic } from "@ethereumjs/util";
 import { getEffEcdsaCircuitInput } from "./test_utils";
 
@@ -34,7 +35,7 @@ describe("pubkey_membership", () => {
     // Compute public key hashes
     for (const privKey of privKeys) {
       const pubKey = privateToPublic(privKey);
-      const pubKeyHash = poseidon.hashPubKey(pubKey);
+      const pubKeyHash = poseidon.hashPubKey(pubKey as Buffer);
       pubKeyHashes.push(pubKeyHash);
     }
 

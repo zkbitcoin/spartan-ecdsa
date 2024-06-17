@@ -12,6 +12,7 @@ import {
 } from "@personaelabs/spartan-ecdsa";
 */
 import {
+  addHexPrefix, bytesToBigInt,
   ecrecover,
   ecsign,
   hashPersonalMessage,
@@ -39,7 +40,8 @@ export default function Home() {
     const { v, r, s } = ecsign(msgHash, privKey);
     const pubKey = ecrecover(msgHash, v, r, s);
     //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
-    const sig = `0x${r.toString()}${s.toString()}${v.toString(16)}`;
+    const sig = addHexPrefix(Buffer.from(r).toString('hex') +Buffer.from(s).toString('hex') + v.toString(16));
+
 
     const poseidon = new Poseidon();
     await poseidon.initWasm();
@@ -114,7 +116,8 @@ export default function Home() {
 
     const { v, r, s } = ecsign(msgHash, privKey);
     //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
-    const sig = `0x${r.toString()}${s.toString()}${v.toString(16)}`;
+    const sig = addHexPrefix(Buffer.from(r).toString('hex') +Buffer.from(s).toString('hex') + v.toString(16));
+
 
     const poseidon = new Poseidon();
     await poseidon.initWasm();
@@ -122,9 +125,9 @@ export default function Home() {
     const treeDepth = 20;
     const addressTree = new Tree(treeDepth, poseidon);
 
-    const proverAddress = BigInt(
+    const proverAddress = bytesToBigInt(
       //"0x" + privateToAddress(privKey).toString("hex")
-    "0x" + privateToAddress(privKey).toString()
+      privateToAddress(privKey)
     );
     addressTree.insert(proverAddress);
 
@@ -134,7 +137,7 @@ export default function Home() {
         Buffer.from("".padStart(16, member), "utf16le")
       );
       //const address = BigInt("0x" + pubToAddress(pubKey).toString("hex"));
-      const address = BigInt("0x" + pubToAddress(pubKey).toString());
+      const address= bytesToBigInt( pubToAddress(pubKey));
       addressTree.insert(address);
     }
 
