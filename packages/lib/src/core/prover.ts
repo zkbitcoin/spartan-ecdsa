@@ -1,16 +1,18 @@
-import { Profiler } from "@src/helpers/profiler";
-import { IProver, MerkleProof, NIZK, ProveArgs, ProverConfig } from "@src/types";
-import { loadCircuit, fromSig, snarkJsWitnessGen } from "@src/helpers/utils";
+import { Profiler } from "@personaelabs/spartan-ecdsa/src/helpers/profiler";
+import { IProver, MerkleProof, NIZK, ProveArgs, ProverConfig } from "@personaelabs/spartan-ecdsa/src/types";
+import { loadCircuit, fromSig, snarkJsWitnessGen } from "@personaelabs/spartan-ecdsa/src/helpers/utils";
 import {
   PublicInput,
   computeEffEcdsaPubInput,
   CircuitPubInput
-} from "@src/helpers/publicInputs";
-import { init, wasm } from "@src/wasm";
-import {
-  defaultPubkeyProverConfig,
-  defaultAddressProverConfig
-} from "@src/config";
+} from "@personaelabs/spartan-ecdsa/src/helpers/publicInputs";
+import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm";
+import { defaultAddressProverConfig, defaultPubkeyProverConfig } from "@personaelabs/spartan-ecdsa/src/config";
+//import {
+//  defaultPubkeyProverConfig,
+//  defaultAddressProverConfig
+//} from "@personaelabs/spartan-ecdsa/src/config";
+
 
 /**
  * ECDSA Membership Prover
@@ -89,7 +91,7 @@ export class MembershipProver extends Profiler implements IProver {
       publicInput.circuitPubInput.serialize();
 
     this.time("Prove");
-    let proof = wasm.prove(circuitBin, witness.data, circuitPublicInput);
+    const proof = wasm.prove(circuitBin, witness.data, circuitPublicInput);
     this.timeEnd("Prove");
 
     return {

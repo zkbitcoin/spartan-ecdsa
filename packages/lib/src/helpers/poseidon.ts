@@ -1,4 +1,4 @@
-import { init, wasm } from "@src/wasm";
+import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm";
 import { bigIntToLeBytes, bytesLeToBigInt } from "./utils";
 
 export class Poseidon {

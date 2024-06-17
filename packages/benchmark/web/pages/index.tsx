@@ -1,4 +1,5 @@
 import { useState } from "react";
+/*
 import {
   MembershipProver,
   MembershipVerifier,
@@ -9,6 +10,7 @@ import {
   defaultPubkeyMembershipVConfig,
   defaultAddressMembershipVConfig
 } from "@personaelabs/spartan-ecdsa";
+*/
 import {
   ecrecover,
   ecsign,
@@ -17,6 +19,15 @@ import {
   privateToPublic,
   pubToAddress
 } from "@ethereumjs/util";
+import { Poseidon } from "@personaelabs/spartan-ecdsa/src/helpers/poseidon";
+import { Tree } from "@personaelabs/spartan-ecdsa/src/helpers/tree";
+import { MembershipProver } from "@personaelabs/spartan-ecdsa/src/core/prover";
+import {
+  defaultAddressMembershipPConfig, defaultAddressMembershipVConfig,
+  defaultPubkeyMembershipPConfig,
+  defaultPubkeyMembershipVConfig
+} from "@personaelabs/spartan-ecdsa/src";
+import { MembershipVerifier } from "@personaelabs/spartan-ecdsa/src/core/verifier";
 
 export default function Home() {
   const provePubKeyMembership = async () => {
@@ -59,10 +70,11 @@ export default function Home() {
 
     await prover.initWasm();
 
+
     const { proof, publicInput } = await prover.prove(
-      sig,
+      {sig,
       msgHash,
-      merkleProof
+      merkleProof}
     );
 
     console.timeEnd("Full proving time");
@@ -80,14 +92,15 @@ export default function Home() {
     await verifier.initWasm();
 
     console.time("Verification time");
-    const result = await verifier.verify(proof, publicInput.serialize());
-    console.timeEnd("Verification time");
+    const ser = publicInput.serialize();
+    //const result = await verifier.verify({ proof, publicInputSer: ser });
+    //console.timeEnd("Verification time");
 
-    if (result) {
-      console.log("Successfully verified proof!");
-    } else {
-      console.log("Failed to verify proof :(");
-    }
+    //if (result) {
+    //  console.log("Successfully verified proof!");
+    //} else {
+    //  console.log("Failed to verify proof :(");
+    //}
   };
 
   const proverAddressMembership = async () => {
@@ -132,9 +145,9 @@ export default function Home() {
     await prover.initWasm();
 
     const { proof, publicInput } = await prover.prove(
-      sig,
+      {sig,
       msgHash,
-      merkleProof
+      merkleProof}
     );
 
     console.timeEnd("Full proving time");
@@ -152,7 +165,8 @@ export default function Home() {
     await verifier.initWasm();
 
     console.time("Verification time");
-    const result = await verifier.verify(proof, publicInput.serialize());
+    const ser = publicInput.serialize();
+    const result = await verifier.verify({proof, publicInputSer:ser});
     console.timeEnd("Verification time");
 
     if (result) {

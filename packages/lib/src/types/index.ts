@@ -1,4 +1,4 @@
-import { PublicInput } from "@src/helpers/publicInputs";
+import { PublicInput } from "@personaelabs/spartan-ecdsa/src/helpers/publicInputs";
 
 // The same structure as MerkleProof in @zk-kit/incremental-merkle-tree.
 // Not directly using MerkleProof defined in @zk-kit/incremental-merkle-tree so

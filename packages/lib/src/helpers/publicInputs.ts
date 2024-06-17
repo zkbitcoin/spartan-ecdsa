@@ -1,7 +1,7 @@
 var EC = require("elliptic").ec;
 const BN = require("bn.js");
 
-import { EffECDSAPubInput } from "@src/types";
+import { EffECDSAPubInput } from "@personaelabs/spartan-ecdsa/src/types";
 import { bytesToBigInt, bigIntToBytes } from "./utils";
 
 const ec = new EC("secp256k1");

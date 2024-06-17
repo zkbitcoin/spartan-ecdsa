@@ -1,8 +1,8 @@
-export { MembershipProver } from "@src/core/prover";
-export { MembershipVerifier } from "@src/core/verifier";
-export { CircuitPubInput, PublicInput, computeEffEcdsaPubInput, verifyEffEcdsaPubInput } from "@src/helpers/publicInputs";
-export { Tree } from "@src/helpers/tree";
-export { Poseidon } from "@src/helpers/poseidon";
-export { init, wasm } from "@src/wasm/index";
-export { defaultPubkeyProverConfig as defaultPubkeyMembershipPConfig, defaultPubkeyVerifierConfig as defaultPubkeyMembershipVConfig, defaultAddressProverConfig as defaultAddressMembershipPConfig, defaultAddressVerifierConfig as defaultAddressMembershipVConfig } from "@src/config";
-export type { MerkleProof, EffECDSAPubInput, NIZK, ProverConfig, VerifyConfig, IProver, IVerifier } from "@src/types";
+export { MembershipProver } from "@personaelabs/spartan-ecdsa/src/core/prover";
+export { MembershipVerifier } from "@personaelabs/spartan-ecdsa/src/core/verifier";
+export { CircuitPubInput, PublicInput, computeEffEcdsaPubInput, verifyEffEcdsaPubInput } from "@personaelabs/spartan-ecdsa/src/helpers/publicInputs";
+export { Tree } from "@personaelabs/spartan-ecdsa/src/helpers/tree";
+export { Poseidon } from "@personaelabs/spartan-ecdsa/src/helpers/poseidon";
+export { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm/index";
+export { defaultPubkeyProverConfig as defaultPubkeyMembershipPConfig, defaultPubkeyVerifierConfig as defaultPubkeyMembershipVConfig, defaultAddressProverConfig as defaultAddressMembershipPConfig, defaultAddressVerifierConfig as defaultAddressMembershipVConfig } from "@personaelabs/spartan-ecdsa/src/config";
+export type { MerkleProof, EffECDSAPubInput, NIZK, ProverConfig, VerifyConfig, IProver, IVerifier } from "@personaelabs/spartan-ecdsa/src/types";

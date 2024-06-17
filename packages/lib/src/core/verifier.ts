@@ -1,12 +1,12 @@
 import {
   defaultAddressVerifierConfig,
   defaultPubkeyVerifierConfig
-} from "@src/config";
-import { Profiler } from "@src/helpers/profiler";
-import { loadCircuit } from "@src/helpers/utils";
-import { IVerifier, VerifyArgs, VerifyConfig } from "@src/types";
-import { init, wasm } from "@src/wasm";
-import { PublicInput, verifyEffEcdsaPubInput } from "@src/helpers/publicInputs";
+} from "@personaelabs/spartan-ecdsa/src/config";
+import { Profiler } from "@personaelabs/spartan-ecdsa/src/helpers/profiler";
+import { loadCircuit } from "@personaelabs/spartan-ecdsa/src/helpers/utils";
+import { IVerifier, VerifyArgs, VerifyConfig } from "@personaelabs/spartan-ecdsa/src/types";
+import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm";
+import { PublicInput, verifyEffEcdsaPubInput } from "@personaelabs/spartan-ecdsa/src/helpers/publicInputs";
 
 /**
  * ECDSA Membership Verifier

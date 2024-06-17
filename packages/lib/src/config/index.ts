@@ -1,4 +1,4 @@
-import { ProverConfig, VerifyConfig } from "@src/types";
+import { ProverConfig, VerifyConfig } from "@personaelabs/spartan-ecdsa/src/types";
 
 // Default configs for pubkey membership proving/verifying
 export const defaultPubkeyProverConfig: ProverConfig = {
