@@ -28,6 +28,7 @@ import {
   defaultPubkeyMembershipVConfig
 } from "@personaelabs/spartan-ecdsa/src";
 import { MembershipVerifier } from "@personaelabs/spartan-ecdsa/src/core/verifier";
+import { ProveArgs } from "@personaelabs/spartan-ecdsa/src/types";
 
 export default function Home() {
   const provePubKeyMembership = async () => {
@@ -37,7 +38,8 @@ export default function Home() {
 
     const { v, r, s } = ecsign(msgHash, privKey);
     const pubKey = ecrecover(msgHash, v, r, s);
-    const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
+    //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
+    const sig = `0x${r.toString()}${s.toString()}${v.toString(16)}`;
 
     const poseidon = new Poseidon();
     await poseidon.initWasm();
@@ -45,7 +47,7 @@ export default function Home() {
     const treeDepth = 20;
     const pubKeyTree = new Tree(treeDepth, poseidon);
 
-    const proverPubKeyHash = poseidon.hashPubKey(pubKey);
+    const proverPubKeyHash = poseidon.hashPubKey(pubKey as Buffer);
 
     pubKeyTree.insert(proverPubKeyHash);
 
@@ -54,7 +56,7 @@ export default function Home() {
       const pubKey = privateToPublic(
         Buffer.from("".padStart(16, member), "utf16le")
       );
-      pubKeyTree.insert(poseidon.hashPubKey(pubKey));
+      pubKeyTree.insert(poseidon.hashPubKey(pubKey as Buffer));
     }
 
     const index = pubKeyTree.indexOf(proverPubKeyHash);
@@ -72,9 +74,11 @@ export default function Home() {
 
 
     const { proof, publicInput } = await prover.prove(
-      {sig,
-      msgHash,
-      merkleProof}
+      {
+        sig,
+        msgHash,
+        merkleProof
+      } as ProveArgs
     );
 
     console.timeEnd("Full proving time");
@@ -93,14 +97,14 @@ export default function Home() {
 
     console.time("Verification time");
     const ser = publicInput.serialize();
-    //const result = await verifier.verify({ proof, publicInputSer: ser });
-    //console.timeEnd("Verification time");
+    const result = await verifier.verify({ proof, publicInputSer: ser });
+    console.timeEnd("Verification time");
 
-    //if (result) {
-    //  console.log("Successfully verified proof!");
-    //} else {
-    //  console.log("Failed to verify proof :(");
-    //}
+    if (result) {
+      console.log("Successfully verified proof!");
+    } else {
+      console.log("Failed to verify proof :(");
+    }
   };
 
   const proverAddressMembership = async () => {
@@ -109,7 +113,8 @@ export default function Home() {
     const msgHash = hashPersonalMessage(msg);
 
     const { v, r, s } = ecsign(msgHash, privKey);
-    const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
+    //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
+    const sig = `0x${r.toString()}${s.toString()}${v.toString(16)}`;
 
     const poseidon = new Poseidon();
     await poseidon.initWasm();
@@ -118,7 +123,8 @@ export default function Home() {
     const addressTree = new Tree(treeDepth, poseidon);
 
     const proverAddress = BigInt(
-      "0x" + privateToAddress(privKey).toString("hex")
+      //"0x" + privateToAddress(privKey).toString("hex")
+    "0x" + privateToAddress(privKey).toString()
     );
     addressTree.insert(proverAddress);
 
@@ -127,7 +133,8 @@ export default function Home() {
       const pubKey = privateToPublic(
         Buffer.from("".padStart(16, member), "utf16le")
       );
-      const address = BigInt("0x" + pubToAddress(pubKey).toString("hex"));
+      //const address = BigInt("0x" + pubToAddress(pubKey).toString("hex"));
+      const address = BigInt("0x" + pubToAddress(pubKey).toString());
       addressTree.insert(address);
     }
 
@@ -145,9 +152,11 @@ export default function Home() {
     await prover.initWasm();
 
     const { proof, publicInput } = await prover.prove(
-      {sig,
-      msgHash,
-      merkleProof}
+      {
+        sig,
+        msgHash,
+        merkleProof
+      } as ProveArgs
     );
 
     console.timeEnd("Full proving time");

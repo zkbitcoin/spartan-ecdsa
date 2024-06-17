@@ -6,6 +6,16 @@ const nextConfig = {
     config.resolve.fallback = { fs: false };
     config.experiments = { asyncWebAssembly: true };
 
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      use: {
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+        },
+      },
+    });
+
     return config;
   },
   async headers() {
