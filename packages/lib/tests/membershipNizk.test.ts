@@ -4,7 +4,7 @@ import {
   privateToAddress,
   privateToPublic,
   bytesToBigInt,
-  bytesToInt, addHexPrefix
+  addHexPrefix
 } from "@ethereumjs/util";
 
 import * as path from "path";
@@ -34,7 +34,7 @@ describe("membership prove and verify", () => {
   let msgHashBuffer: Buffer = msgHash as Buffer
 
 
-  const { v, r, s } = ecsign(msgHash, proverPrivKey);
+  const { v, r, s } = ecsign(msgHash, proverPrivKey as Buffer);
   //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
   const sig = addHexPrefix(Buffer.from(r).toString('hex') +Buffer.from(s).toString('hex') + v.toString(16));
   

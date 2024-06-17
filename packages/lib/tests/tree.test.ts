@@ -19,13 +19,17 @@ describe("Merkle tree prove and verify", () => {
 
   it("should prove and verify a valid Merkle proof", async () => {
     const proof = tree.createProof(0);
-    expect(tree.verifyProof(proof, members[0])).toBe(true);
+    expect(tree.verifyProof(proof, members[0] as bigint)).toBe(true);
   });
 
   it("should assert an invalid Merkle proof", async () => {
     const proof = tree.createProof(0);
-    proof.siblings[0][0] = proof.siblings[0][0] += BigInt(1);
-    expect(tree.verifyProof(proof, members[0])).toBe(false);
-    proof.siblings[0][0] = proof.siblings[0][0] -= BigInt(1);
+    if (proof && proof.siblings && proof.siblings[0] && proof.siblings[0][0]) {
+      proof.siblings[0][0] += BigInt(1);
+    }
+    expect(tree.verifyProof(proof, members[0] as bigint)).toBe(false);
+    if (proof && proof.siblings && proof.siblings[0] && proof.siblings[0][0]) {
+      proof.siblings[0][0] -= BigInt(1);
+    }
   });
 });

@@ -1,0 +1,80 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:react/recommended", "prettier"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-case-declarations": "off",
+    "no-prototype-builtins": "off",
+    "prefer-const": "warn",
+    "no-async-promise-executor": "off",
+    "react/jsx-handler-names": "off",
+    "react/jsx-fragments": "off",
+    "react/prop-types": "off",
+    "react/jsx-no-target-blank": "off",
+    "react/jsx-indent": "off",
+    "react/no-deprecated": "warn",
+    "react/display-name": "warn",
+    "react/no-unescaped-entities": "off",
+    "import/no-webpack-loader-syntax": "off"
+  },
+  "globals": {
+    "it": true,
+    "describe": true,
+    "test": true,
+    "jest": true,
+    "expect": true,
+    "beforeAll": true,
+    "afterAll": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "neo": true,
+    "FileReader": true,
+    "Blob": true,
+    "fetch": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "overrides": [
+    {
+      "parser": "@typescript-eslint/parser",
+      "files": ["*.ts", "**/*.ts", "**/*.tsx"],
+      "extends": [
+        "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+        "prettier", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+        // disables react-specific linting rules that conflict with prettier
+        "plugin:react/recommended", // Uses the recommended rules from @eslint-plugin-react
+        "plugin:react-hooks/recommended" // https://reactjs.org/docs/hooks-rules.html
+      ],
+      "plugins": [
+        "@typescript-eslint/eslint-plugin",
+        "@typescript-eslint",
+        "react"
+      ],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/no-var-requires": "warn",
+        "@typescript-eslint/no-loss-of-precision": "warn",
+        "no-var": "warn",
+        "prefer-rest-params": "warn",
+        "prefer-spread": "warn",
+        "react-hooks/exhaustive-deps": "off",
+        "react-hooks/rules-of-hooks": "warn",
+        "react/no-unescaped-entities": "off",
+        "react/prop-types": "error"
+      }
+    }
+  ]
+}
