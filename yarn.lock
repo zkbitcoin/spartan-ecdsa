@@ -1921,25 +1921,25 @@ __metadata:
 
 "@personaelabs/spartan-ecdsa@file:./../../lib::locator=node%40workspace%3Apackages%2Fbenchmark%2Fnode":
   version: 2.3.1
-  resolution: "@personaelabs/spartan-ecdsa@file:./../../lib#./../../lib::hash=d21d50&locator=node%40workspace%3Apackages%2Fbenchmark%2Fnode"
+  resolution: "@personaelabs/spartan-ecdsa@file:./../../lib#./../../lib::hash=91123b&locator=node%40workspace%3Apackages%2Fbenchmark%2Fnode"
   dependencies:
     "@ethereumjs/util": "npm:^9.0.3"
     "@zk-kit/incremental-merkle-tree": "npm:^1.1.0"
     elliptic: "npm:^6.5.5"
     snarkjs: "npm:^0.7.4"
-  checksum: 10c0/5b7283f0814abc6b443b39d234bd97b91f6aac930e2458b608f6605dc544a8983b2d98f924e2f6163ff71e902845984bd567511babc1807b475cae32fac06493
+  checksum: 10c0/6ee2a318b7ecb9357c430a6192647449d6f5504ec594f5947508d82e472d2bb4cfc9c4d13c6e01ca7b2356ed04bf38bdcf0bcb2768d7b42c9fff09292e609bde
   languageName: node
   linkType: hard
 
 "@personaelabs/spartan-ecdsa@file:./../../lib::locator=spartan-bench%40workspace%3Apackages%2Fbenchmark%2Fweb":
   version: 2.3.1
-  resolution: "@personaelabs/spartan-ecdsa@file:./../../lib#./../../lib::hash=d21d50&locator=spartan-bench%40workspace%3Apackages%2Fbenchmark%2Fweb"
+  resolution: "@personaelabs/spartan-ecdsa@file:./../../lib#./../../lib::hash=91123b&locator=spartan-bench%40workspace%3Apackages%2Fbenchmark%2Fweb"
   dependencies:
     "@ethereumjs/util": "npm:^9.0.3"
     "@zk-kit/incremental-merkle-tree": "npm:^1.1.0"
     elliptic: "npm:^6.5.5"
     snarkjs: "npm:^0.7.4"
-  checksum: 10c0/5b7283f0814abc6b443b39d234bd97b91f6aac930e2458b608f6605dc544a8983b2d98f924e2f6163ff71e902845984bd567511babc1807b475cae32fac06493
+  checksum: 10c0/6ee2a318b7ecb9357c430a6192647449d6f5504ec594f5947508d82e472d2bb4cfc9c4d13c6e01ca7b2356ed04bf38bdcf0bcb2768d7b42c9fff09292e609bde
   languageName: node
   linkType: hard
 
