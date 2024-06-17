@@ -41,3 +41,4 @@ packages/lib/src/circuits/
 packages/lib/example/
 
 yarn.lock
+.idea
