@@ -22,17 +22,19 @@
   "files": [
     "dist/**/*"
   ],
+  "type": "module",
   "scripts": {
     "build": "rm -rf ./dist && yarn embedWasmBytes && tsc --project tsconfig.build.json",
     "prepublishOnly": "yarn build",
     "prepare": "yarn embedWasmBytes",
-    "embedWasmBytes": "ts-node ./embedWasmBytes.ts",
+    "embedWasmBytes": "node --no-warnings=ExperimentalWarning --loader ts-node/esm embedWasmBytes.ts",
     "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@zk-kit/incremental-merkle-tree": "^1.1.0",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.1.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"

@@ -2,6 +2,6 @@
 /src
 /tests
 tsconfig.json
-jest.config.js
+jest.config.ts
 copy_artifacts.sh
 load_wasm.ts
