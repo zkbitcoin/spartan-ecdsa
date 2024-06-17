@@ -3,7 +3,6 @@ import { bigIntToLeBytes, bytesLeToBigInt } from "./utils";
 import { bytesToBigInt } from '@ethereumjs/util';
 
 
-
 export class Poseidon {
   hash(inputs: bigint[]): bigint {
     const inputsBytes = new Uint8Array(32 * inputs.length);
