@@ -7,6 +7,7 @@
   "author": "Daniel Tehrani <contact@dantehrani.com>",
   "scripts": {
     "build": "sh ./scripts/build.sh && lerna run build",
+    "bench": "sh ./scripts/bench.sh",
     "test": "sh ./scripts/test.sh"
   },
   "devDependencies": {
