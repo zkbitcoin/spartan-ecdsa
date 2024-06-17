@@ -4,10 +4,11 @@
   "main": "node.bench.ts",
   "license": "MIT",
   "scripts": {
+    "build": "rm -rf ./dist && tsc --project tsconfig.json",
     "bench": "ts-node ./src/node.bench.ts"
   },
   "dependencies": {
-    "@ethereumjs/util": "^8.0.3",
+    "@ethereumjs/util": "^9.0.3",
     "@personaelabs/spartan-ecdsa": "file:./../../lib"
   },
   "devDependencies": {

@@ -14,7 +14,7 @@ import {
   hashPersonalMessage,
   ecsign,
   ecrecover,
-  privateToPublic
+  privateToPublic, addHexPrefix
 } from "@ethereumjs/util";
 import * as path from "path";
 
@@ -22,10 +22,13 @@ const benchPubKeyMembership = async () => {
   const privKey = Buffer.from("".padStart(16, "🧙"), "utf16le");
   const msg = Buffer.from("harry potter");
   const msgHash = hashPersonalMessage(msg);
+  let msgHashBuffer: Buffer = msgHash as Buffer
 
   const { v, r, s } = ecsign(msgHash, privKey);
   const pubKey = ecrecover(msgHash, v, r, s);
-  const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
+  //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
+  const sig = addHexPrefix(Buffer.from(r).toString('hex') +Buffer.from(s).toString('hex') + v.toString(16));
+
 
   // Init the Poseidon hash
   const poseidon = new Poseidon();
@@ -35,7 +38,7 @@ const benchPubKeyMembership = async () => {
   const tree = new Tree(treeDepth, poseidon);
 
   // Get the prover public key hash
-  const proverPubkeyHash = poseidon.hashPubKey(pubKey);
+  const proverPubkeyHash = poseidon.hashPubKey(<Buffer>pubKey);
 
   // Insert prover public key hash into the tree
   tree.insert(proverPubkeyHash);
@@ -45,7 +48,7 @@ const benchPubKeyMembership = async () => {
     const pubKey = privateToPublic(
       Buffer.from("".padStart(16, member), "utf16le")
     );
-    tree.insert(poseidon.hashPubKey(pubKey));
+    tree.insert(poseidon.hashPubKey(<Buffer>pubKey));
   }
 
   // Compute the merkle proof
@@ -69,7 +72,7 @@ const benchPubKeyMembership = async () => {
   await prover.initWasm();
 
   // Prove membership
-  const { proof, publicInput } = await prover.prove({sig, msgHash, merkleProof});
+  const { proof, publicInput } = await prover.prove({sig, msgHash : msgHashBuffer, merkleProof});
 
   const verifierConfig = {
     circuit: proverConfig.circuit,

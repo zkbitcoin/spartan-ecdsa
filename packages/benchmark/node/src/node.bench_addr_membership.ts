@@ -1,7 +1,7 @@
 import {
   hashPersonalMessage,
   privateToAddress,
-  ecsign
+  ecsign, bytesToBigInt, addHexPrefix
 } from "@ethereumjs/util";
 /*
 import {
@@ -21,9 +21,12 @@ const benchAddrMembership = async () => {
   const privKey = Buffer.from("".padStart(16, "🧙"), "utf16le");
   const msg = Buffer.from("harry potter");
   const msgHash = hashPersonalMessage(msg);
+  let msgHashBuffer: Buffer = msgHash as Buffer
 
   const { v, r, s } = ecsign(msgHash, privKey);
-  const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
+  //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
+  const sig = addHexPrefix(Buffer.from(r).toString('hex') +Buffer.from(s).toString('hex') + v.toString(16));
+
 
   // Init the Poseidon hash
   const poseidon = new Poseidon();
@@ -33,8 +36,9 @@ const benchAddrMembership = async () => {
   const tree = new Tree(treeDepth, poseidon);
 
   // Get the prover public key hash
-  const proverAddress = BigInt(
-    "0x" + privateToAddress(privKey).toString("hex")
+  const proverAddress =
+    //"0x" + privateToAddress(privKey).toString("hex")
+    bytesToBigInt(privateToAddress(privKey)
   );
 
   // Insert prover public key hash into the tree
@@ -42,11 +46,9 @@ const benchAddrMembership = async () => {
 
   // Insert other members into the tree
   for (const member of ["🕵️", "🥷", "👩‍🔬"]) {
-    const address = BigInt(
-      "0x" +
-        privateToAddress(
-          Buffer.from("".padStart(16, member), "utf16le")
-        ).toString("hex")
+    const address = bytesToBigInt(
+      //"0x" + privateToAddress(Buffer.from("".padStart(16, member), "utf16le")).toString("hex")
+      privateToAddress(Buffer.from("".padStart(16, member), "utf16le"))
     );
     tree.insert(address);
   }
@@ -72,7 +74,7 @@ const benchAddrMembership = async () => {
   await prover.initWasm();
 
   // Prove membership
-  const { proof, publicInput } = await prover.prove({sig, msgHash, merkleProof});
+  const { proof, publicInput } = await prover.prove({sig, msgHash : msgHashBuffer, merkleProof});
 
   const verifierConfig = {
     circuit: proverConfig.circuit,
