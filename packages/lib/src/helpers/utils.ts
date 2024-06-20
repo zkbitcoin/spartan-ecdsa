@@ -1,5 +1,5 @@
 // @ts-ignore
-const snarkJs = require("snarkjs");
+import * as  snarkJs from "snarkjs";
 import { fromRpcSig } from "@ethereumjs/util";
 import * as fs from "fs";
 

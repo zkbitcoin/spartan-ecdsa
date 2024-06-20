@@ -1,6 +1,6 @@
-import * as wasm from "./wasm";
+import * as wasm from "./wasm.js";
 
-import { wasmBytes } from "./wasmBytes";
+import { wasmBytes } from "./wasmBytes.ts";
 
 export const init = async () => {
   await wasm.initSync(wasmBytes.buffer);

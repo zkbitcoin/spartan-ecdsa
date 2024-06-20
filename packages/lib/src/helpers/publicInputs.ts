@@ -1,10 +1,9 @@
-var EC = require("elliptic").ec;
-const BN = require("bn.js");
-
+import BN from "bn.js";
+import ec from "elliptic"
 import { EffECDSAPubInput } from "@personaelabs/spartan-ecdsa/src/types";
-import { bytesToBigInt, bigIntToBytes } from "./utils";
+import { bytesToBigInt, bigIntToBytes } from "./utils.ts";
 
-const ec = new EC("secp256k1");
+const e = new ec.ec('secp256k1');
 
 const SECP256K1_N = new BN(
   "fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141",
@@ -117,18 +116,18 @@ export const computeEffEcdsaPubInput = (
   msgHash: Buffer
 ): EffECDSAPubInput => {
   const isYOdd = (v - BigInt(27)) % BigInt(2);
-  const rPoint = ec.keyFromPublic(
-    ec.curve.pointFromX(new BN(r), isYOdd).encode("hex"),
+  const rPoint = e.keyFromPublic(
+    e.curve.pointFromX(new BN(r as unknown as number), isYOdd).encode("hex"),
     "hex"
   );
 
   // Get the group element: -(m * r^−1 * G)
-  const rInv = new BN(r).invm(SECP256K1_N);
+  const rInv = new BN(r as unknown as number).invm(SECP256K1_N);
 
   // w = -(r^-1 * msg)
   const w = rInv.mul(new BN(msgHash)).neg().umod(SECP256K1_N);
   // U = -(w * G) = -(r^-1 * msg * G)
-  const U = ec.curve.g.mul(w);
+  const U = e.curve.g.mul(w);
 
   // T = r^-1 * R
   const T = rPoint.getPublic().mul(rInv);

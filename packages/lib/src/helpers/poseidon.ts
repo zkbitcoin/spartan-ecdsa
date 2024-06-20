@@ -1,5 +1,5 @@
-import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm";
-import { bigIntToLeBytes, bytesLeToBigInt } from "./utils";
+import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm/index.ts";
+import { bigIntToLeBytes, bytesLeToBigInt } from "./utils.ts";
 import { bytesToBigInt } from '@ethereumjs/util';
 
 

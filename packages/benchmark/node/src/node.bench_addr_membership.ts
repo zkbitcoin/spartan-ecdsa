@@ -12,10 +12,11 @@ import {
 } from "@personaelabs/spartan-ecdsa";
  */
 import * as path from "path";
-import { Poseidon } from "@personaelabs/spartan-ecdsa/src/helpers/poseidon";
-import { Tree } from "@personaelabs/spartan-ecdsa/src/helpers/tree";
-import { MembershipProver } from "@personaelabs/spartan-ecdsa/src/core/prover";
-import { MembershipVerifier } from "@personaelabs/spartan-ecdsa/src/core/verifier";
+import { Poseidon } from "@personaelabs/spartan-ecdsa/src/helpers/poseidon.ts";
+import { Tree } from "@personaelabs/spartan-ecdsa/src/helpers/tree.ts";
+import { MembershipProver } from "@personaelabs/spartan-ecdsa/src/core/prover.ts";
+import { MembershipVerifier } from "@personaelabs/spartan-ecdsa/src/core/verifier.ts";
+
 
 const benchAddrMembership = async () => {
   const privKey = Buffer.from("".padStart(16, "🧙"), "utf16le");

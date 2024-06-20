@@ -1,13 +1,13 @@
-import { Profiler } from "@personaelabs/spartan-ecdsa/src/helpers/profiler";
-import { IProver, NIZK, ProveArgs, ProverConfig } from "@personaelabs/spartan-ecdsa/src/types";
-import { loadCircuit, fromSig, snarkJsWitnessGen } from "@personaelabs/spartan-ecdsa/src/helpers/utils";
+import { Profiler } from "@personaelabs/spartan-ecdsa/src/helpers/profiler.ts";
+import { IProver, NIZK, ProveArgs, ProverConfig } from "@personaelabs/spartan-ecdsa/src/types/index.ts";
+import { loadCircuit, fromSig, snarkJsWitnessGen } from "@personaelabs/spartan-ecdsa/src/helpers/utils.ts";
 import {
   PublicInput,
   computeEffEcdsaPubInput,
   CircuitPubInput
-} from "@personaelabs/spartan-ecdsa/src/helpers/publicInputs";
-import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm";
-import { defaultAddressProverConfig, defaultPubkeyProverConfig } from "@personaelabs/spartan-ecdsa/src/config";
+} from "@personaelabs/spartan-ecdsa/src/helpers/publicInputs.ts";
+import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm/index.ts";
+import { defaultAddressProverConfig, defaultPubkeyProverConfig } from "@personaelabs/spartan-ecdsa/src/config/index.ts";
 //import {
 //  defaultPubkeyProverConfig,
 //  defaultAddressProverConfig
