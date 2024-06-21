@@ -30,8 +30,8 @@ describe("membership prove and verify", () => {
   const proverPrivKey = privKeys[proverIndex];
 
   let msg = Buffer.from("harry potter");
-  const msgHash = hashPersonalMessage(msg);
-  let msgHashBuffer: Buffer = msgHash as Buffer
+  const msgHash = Buffer.from(hashPersonalMessage(msg));
+  let msgHashBuffer: Buffer = msgHash;
 
 
   const { v, r, s } = ecsign(msgHash, proverPrivKey as Buffer);
@@ -74,8 +74,8 @@ describe("membership prove and verify", () => {
       let proverPubKeyHash;
       // Insert the members into the tree
       for (const privKey of privKeys) {
-        const pubKey = privateToPublic(privKey);
-        const pubKeyHash = poseidon.hashPubKey(pubKey as Buffer);
+        const pubKey = Buffer.from(privateToPublic(privKey));
+        const pubKeyHash = poseidon.hashPubKey(pubKey);
         pubKeyTree.insert(pubKeyHash);
 
         // Set prover's public key hash for the reference below
