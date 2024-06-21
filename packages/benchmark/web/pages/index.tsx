@@ -37,7 +37,7 @@ export default function Home() {
     const msgHash = hashPersonalMessage(msg);
 
     const { v, r, s } = ecsign(msgHash, privKey);
-    const pubKey = ecrecover(msgHash, v, r, s);
+    const pubKey = Buffer.from(ecrecover(msgHash, v, r, s));
     //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
     const sig = addHexPrefix(Buffer.from(r).toString('hex') +Buffer.from(s).toString('hex') + v.toString(16));
 
@@ -48,16 +48,16 @@ export default function Home() {
     const treeDepth = 20;
     const pubKeyTree = new Tree(treeDepth, poseidon);
 
-    const proverPubKeyHash = poseidon.hashPubKey(pubKey as Buffer);
+    const proverPubKeyHash = poseidon.hashPubKey(pubKey);
 
     pubKeyTree.insert(proverPubKeyHash);
 
     // Insert other members into the tree
     for (const member of ["🕵️", "🥷", "👩‍🔬"]) {
-      const pubKey = privateToPublic(
+      const pubKey = Buffer.from(privateToPublic(
         Buffer.from("".padStart(16, member), "utf16le")
-      );
-      pubKeyTree.insert(poseidon.hashPubKey(pubKey as Buffer));
+      ));
+      pubKeyTree.insert(poseidon.hashPubKey(pubKey));
     }
 
     const index = pubKeyTree.indexOf(proverPubKeyHash);
