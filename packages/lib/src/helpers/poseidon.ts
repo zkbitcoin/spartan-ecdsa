@@ -1,6 +1,5 @@
 import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm/index.ts";
 import { bigIntToLeBytes, bytesLeToBigInt } from "./utils.ts";
-import { bytesToBigInt } from '@ethereumjs/util';
 
 
 export class Poseidon {
@@ -19,10 +18,8 @@ export class Poseidon {
   }
 
   hashPubKey(pubKey: Buffer): bigint {
-    //const pubKeyX = BigInt("0x" + pubKey.toString("hex").slice(0, 64));
-    const pubKeyX = bytesToBigInt( pubKey.subarray(0, 64));
-    //const pubKeyY = BigInt("0x" + pubKey.toString("hex").slice(64, 128));
-    const pubKeyY = bytesToBigInt(pubKey.subarray(64, 128));
+    const pubKeyX = BigInt("0x" + pubKey.toString("hex").slice(0, 64));
+    const pubKeyY = BigInt("0x" + pubKey.toString("hex").slice(64, 128));
     const pubKeyHash = this.hash([pubKeyX, pubKeyY]);
     return pubKeyHash;
   }

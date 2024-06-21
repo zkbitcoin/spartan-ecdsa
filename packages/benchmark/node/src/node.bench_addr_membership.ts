@@ -11,18 +11,22 @@ import {
   MembershipVerifier
 } from "@personaelabs/spartan-ecdsa";
  */
-import * as path from "path";
 import { Poseidon } from "@personaelabs/spartan-ecdsa/src/helpers/poseidon.ts";
 import { Tree } from "@personaelabs/spartan-ecdsa/src/helpers/tree.ts";
 import { MembershipProver } from "@personaelabs/spartan-ecdsa/src/core/prover.ts";
 import { MembershipVerifier } from "@personaelabs/spartan-ecdsa/src/core/verifier.ts";
 
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 
 const benchAddrMembership = async () => {
   const privKey = Buffer.from("".padStart(16, "🧙"), "utf16le");
   const msg = Buffer.from("harry potter");
-  const msgHash = hashPersonalMessage(msg);
-  let msgHashBuffer: Buffer = msgHash as Buffer
+  const msgHash = Buffer.from(hashPersonalMessage(msg));
+  let msgHashBuffer: Buffer = msgHash
 
   const { v, r, s } = ecsign(msgHash, privKey);
   //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;

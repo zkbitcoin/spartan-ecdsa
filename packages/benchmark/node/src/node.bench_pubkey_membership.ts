@@ -26,11 +26,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const benchPubKeyMembership = async () => {
   const privKey = Buffer.from("".padStart(16, "🧙"), "utf16le");
   const msg = Buffer.from("harry potter");
-  const msgHash = hashPersonalMessage(msg);
-  let msgHashBuffer: Buffer = msgHash as Buffer
+  const msgHash = Buffer.from(hashPersonalMessage(msg));
+  let msgHashBuffer: Buffer = msgHash;
 
   const { v, r, s } = ecsign(msgHash, privKey);
-  const pubKey = ecrecover(msgHash, v, r, s);
+  const pubKey = Buffer.from(ecrecover(msgHash, v, r, s));
   //const sig = `0x${r.toString("hex")}${s.toString("hex")}${v.toString(16)}`;
   const sig = addHexPrefix(Buffer.from(r).toString('hex') +Buffer.from(s).toString('hex') + v.toString(16));
 
@@ -43,17 +43,17 @@ const benchPubKeyMembership = async () => {
   const tree = new Tree(treeDepth, poseidon);
 
   // Get the prover public key hash
-  const proverPubkeyHash = poseidon.hashPubKey(<Buffer>pubKey);
+  const proverPubkeyHash = poseidon.hashPubKey(pubKey);
 
   // Insert prover public key hash into the tree
   tree.insert(proverPubkeyHash);
 
   // Insert other members into the tree
   for (const member of ["🕵️", "🥷", "👩‍🔬"]) {
-    const pubKey = privateToPublic(
+    const pubKey = Buffer.from(privateToPublic(
       Buffer.from("".padStart(16, member), "utf16le")
-    );
-    tree.insert(poseidon.hashPubKey(<Buffer>pubKey));
+    ));
+    tree.insert(poseidon.hashPubKey(pubKey));
   }
 
   // Compute the merkle proof
