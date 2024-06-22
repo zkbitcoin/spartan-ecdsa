@@ -1912,27 +1912,27 @@ __metadata:
 
 "@personaelabs/spartan-ecdsa@file:./../../lib::locator=node%40workspace%3Apackages%2Fbenchmark%2Fnode":
   version: 2.3.1
-  resolution: "@personaelabs/spartan-ecdsa@file:./../../lib#./../../lib::hash=412bf9&locator=node%40workspace%3Apackages%2Fbenchmark%2Fnode"
+  resolution: "@personaelabs/spartan-ecdsa@file:./../../lib#./../../lib::hash=1f3b5f&locator=node%40workspace%3Apackages%2Fbenchmark%2Fnode"
   dependencies:
     "@ethereumjs/util": "npm:^9.0.3"
     "@types/elliptic": "npm:^6.4.18"
     "@zk-kit/incremental-merkle-tree": "npm:^1.1.0"
     elliptic: "npm:^6.5.5"
     snarkjs: "npm:^0.7.4"
-  checksum: 10c0/2c06af979b288a180a2af1b8f8d33af465c738074998c5c767f38ba56cc12eb6889a865f253ba5f1608e80d93cf966f58acd3c862cf31c68efc73c8bad03daa0
+  checksum: 10c0/77f6c21bc3f1ebda355691af88ad25938a026a5f3d0cc04270fbfe41fb21e29a87b92c1cb8e362f972f88609fc336803a2103f471bb7fe184313124b8e02f202
   languageName: node
   linkType: hard
 
 "@personaelabs/spartan-ecdsa@file:./../../lib::locator=spartan-bench%40workspace%3Apackages%2Fbenchmark%2Fweb":
   version: 2.3.1
-  resolution: "@personaelabs/spartan-ecdsa@file:./../../lib#./../../lib::hash=412bf9&locator=spartan-bench%40workspace%3Apackages%2Fbenchmark%2Fweb"
+  resolution: "@personaelabs/spartan-ecdsa@file:./../../lib#./../../lib::hash=1f3b5f&locator=spartan-bench%40workspace%3Apackages%2Fbenchmark%2Fweb"
   dependencies:
     "@ethereumjs/util": "npm:^9.0.3"
     "@types/elliptic": "npm:^6.4.18"
     "@zk-kit/incremental-merkle-tree": "npm:^1.1.0"
     elliptic: "npm:^6.5.5"
     snarkjs: "npm:^0.7.4"
-  checksum: 10c0/2c06af979b288a180a2af1b8f8d33af465c738074998c5c767f38ba56cc12eb6889a865f253ba5f1608e80d93cf966f58acd3c862cf31c68efc73c8bad03daa0
+  checksum: 10c0/77f6c21bc3f1ebda355691af88ad25938a026a5f3d0cc04270fbfe41fb21e29a87b92c1cb8e362f972f88609fc336803a2103f471bb7fe184313124b8e02f202
   languageName: node
   linkType: hard
 
@@ -12587,11 +12587,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A>=3 < 6#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.4.5#optional!builtin<compat/typescript>":
   version: 5.5.2
-  resolution: "typescript@patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=b45daf"
+  resolution: "typescript@patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=379a07"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/6721ac8933a70c252d7b640b345792e103d881811ff660355617c1836526dbb71c2044e2e77a8823fb3570b469f33276875a4cab6d3c4de4ae7d7ee1c3074ae4
+  checksum: 10c0/a7b7ede75dc7fc32a76d0d0af6b91f5fbd8620890d84c906f663d8783bf3de6d7bd50f0430b8bb55eac88a38934af847ff709e7156e5138b95ae94cbd5f73e5b
   languageName: node
   linkType: hard
 
