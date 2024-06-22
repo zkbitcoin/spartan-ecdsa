@@ -103,7 +103,7 @@ describe("membership prove and verify", () => {
     it("should assert invalid proof", async () => {
       const { publicInput } = nizk;
       let proof = nizk.proof;
-      proof[0] = proof[0] += 1;
+      proof[0] = (proof[0] || 0) + 1;
       expect(
         await pubKeyMembershipVerifier.verify({
           proof,
@@ -115,7 +115,7 @@ describe("membership prove and verify", () => {
     it("should assert invalid public input", async () => {
       const { proof } = nizk;
       let publicInputSer = nizk.publicInput.serialize();
-      publicInputSer[0] = publicInputSer[0] += 1;
+      publicInputSer[0] = (publicInputSer[0] || 0) + 1;
       expect(
         await pubKeyMembershipVerifier.verify({
           proof,
@@ -183,7 +183,7 @@ describe("membership prove and verify", () => {
     it("should assert invalid proof", async () => {
       const { publicInput } = nizk;
       let proof = nizk.proof;
-      proof[0] = proof[0] += 1;
+      proof[0] = (proof[0] || 0) + 1;
       expect(
         await addressMembershipVerifier.verify({
           proof,
@@ -195,7 +195,7 @@ describe("membership prove and verify", () => {
     it("should assert invalid public input", async () => {
       const { proof } = nizk;
       let publicInputSer = nizk.publicInput.serialize();
-      publicInputSer[0] = publicInputSer[0] += 1;
+      publicInputSer[0] = (publicInputSer[0] || 0) + 1;
       expect(
         await addressMembershipVerifier.verify({
           proof,

@@ -111,14 +111,20 @@
   },
   "ts-node": {
     "esm": true,
+    "transpileOnly": true,
+    "files": true,
+    "skipIgnore": true,
+    "experimentalResolver": true,
     "compilerOptions": {
-      "module": "ESNext",
+      "module": "ESNext"
     }
   },
   "include": [
     "./src/**/*",
     "./src/**/*.wasm",
-    "./tests/**/*"
+    "./tests/**/*",
+    "../../node_modules/@types/node/buffer.d.ts",
+    "../../node_modules/@types/node/globals.d.ts"
   ],
   "exclude": [
     "./jest.config",
