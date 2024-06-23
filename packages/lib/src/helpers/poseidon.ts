@@ -1,5 +1,5 @@
-import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm/index.ts";
-import { bigIntToLeBytes, bytesLeToBigInt } from "./utils.ts";
+import { init, wasm } from "@personaelabs/spartan-ecdsa/src/wasm/index";
+import { bigIntToLeBytes, bytesLeToBigInt } from "./utils";
 
 
 export class Poseidon {

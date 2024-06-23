@@ -1,7 +1,7 @@
 import BN from "bn.js";
 import ec from "elliptic"
 import { EffECDSAPubInput } from "@personaelabs/spartan-ecdsa/src/types";
-import { bytesToBigInt, bigIntToBytes } from "./utils.ts";
+import { bytesToBigInt, bigIntToBytes } from "./utils";
 
 const e = new ec.ec('secp256k1');
 

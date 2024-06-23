@@ -111,7 +111,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "../../../node_modules/@types/node/buffer.d.ts",
   ],
   "exclude": [
     "node_modules"
